@@ -1,0 +1,2746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Netmax Technologies | Advanced Industrial Training & Placement Center</title>
+
+  <!-- Bootstrap 5.3 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+  <!-- FontAwesome 6.4 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <!-- Google Fonts: Poppins -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" />
+
+  <style>
+    /* ===================== GLOBAL RESETS & VARIABLES ===================== */
+    :root {
+      --bg-primary: #0b0c10;
+      --bg-secondary: #1f2833;
+      --bg-card: #141921;
+      --accent-teal: #66fcf1;
+      --accent-blue: #45f3ff;
+      --text-silver: #c5c6c7;
+      --text-white: #ffffff;
+      --border-subtle: rgba(102, 252, 241, 0.15);
+      --glow-teal: 0 0 20px rgba(102, 252, 241, 0.4);
+      --glow-strong: 0 0 40px rgba(102, 252, 241, 0.6);
+      --font-main: 'Poppins', sans-serif;
+      --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-primary);
+      color: var(--text-silver);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--accent-teal); border-radius: 3px; }
+
+    /* ===================== ANNOUNCEMENT BAR ===================== */
+    #announcement-bar {
+      background: linear-gradient(90deg, var(--bg-secondary) 0%, #0d1117 50%, var(--bg-secondary) 100%);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 8px 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.03em;
+      position: relative;
+      z-index: 1100;
+    }
+
+    #announcement-bar .brand-label {
+      color: var(--accent-teal);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    #announcement-bar .contact-links a {
+      color: var(--text-silver);
+      text-decoration: none;
+      margin-left: 16px;
+      transition: var(--transition);
+    }
+
+    #announcement-bar .contact-links a:hover { color: var(--accent-teal); }
+    #announcement-bar .contact-links i { margin-right: 4px; color: var(--accent-teal); }
+
+    /* ===================== NAVBAR ===================== */
+    #main-navbar {
+      background: rgba(11, 12, 16, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 14px 0;
+      transition: var(--transition);
+      z-index: 1050;
+    }
+
+    #main-navbar.scrolled {
+      padding: 10px 0;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
+
+    .navbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .brand-icon-wrap {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: var(--bg-primary);
+      box-shadow: var(--glow-teal);
+    }
+
+    .brand-text { line-height: 1.1; }
+    .brand-name { font-size: 1.05rem; font-weight: 700; color: var(--text-white); letter-spacing: 0.02em; }
+    .brand-tagline { font-size: 0.62rem; color: var(--accent-teal); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+
+    .navbar-nav .nav-link {
+      color: var(--text-silver) !important;
+      font-size: 0.88rem;
+      font-weight: 500;
+      padding: 8px 16px !important;
+      border-radius: 6px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+      width: 0; height: 2px;
+      background: var(--accent-teal);
+      border-radius: 1px;
+      transition: width 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active { color: var(--accent-teal) !important; }
+    .navbar-nav .nav-link:hover::after,
+    .navbar-nav .nav-link.active::after { width: 60%; }
+
+    .nav-cta-btn {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      color: var(--bg-primary) !important;
+      font-weight: 700 !important;
+      padding: 8px 20px !important;
+      border-radius: 25px !important;
+      font-size: 0.82rem !important;
+      letter-spacing: 0.04em;
+      box-shadow: var(--glow-teal);
+      transition: var(--transition) !important;
+    }
+
+    .nav-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--glow-strong);
+    }
+
+    .navbar-toggler {
+      border: 1px solid var(--border-subtle) !important;
+      padding: 6px 10px;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(102,252,241,0.9)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
+
+    /* ===================== HERO SECTION ===================== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--bg-primary);
+    }
+
+    #three-canvas-container {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+    }
+
+    #three-canvas-container canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(
+        135deg,
+        rgba(11, 12, 16, 0.88) 0%,
+        rgba(11, 12, 16, 0.65) 40%,
+        rgba(11, 12, 16, 0.25) 100%
+      );
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 120px 0 80px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(102, 252, 241, 0.08);
+      border: 1px solid rgba(102, 252, 241, 0.3);
+      border-radius: 25px;
+      padding: 6px 18px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent-teal);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 28px;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .hero-badge .badge-dot {
+      width: 8px; height: 8px;
+      background: var(--accent-teal);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    .hero-headline {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--text-white);
+      margin-bottom: 24px;
+      animation: fadeInUp 0.7s ease 0.1s forwards;
+      opacity: 0;
+    }
+
+    .hero-headline .highlight {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      font-weight: 300;
+      color: var(--text-silver);
+      max-width: 580px;
+      margin-bottom: 40px;
+      animation: fadeInUp 0.7s ease 0.2s forwards;
+      opacity: 0;
+      line-height: 1.8;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      animation: fadeInUp 0.7s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .btn-primary-glow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      color: var(--bg-primary);
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 14px 30px;
+      border-radius: 8px;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      box-shadow: var(--glow-teal);
+      transition: var(--transition);
+      font-family: var(--font-main);
+      letter-spacing: 0.03em;
+    }
+
+    .btn-primary-glow:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--glow-strong);
+      color: var(--bg-primary);
+    }
+
+    .btn-glass {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(102, 252, 241, 0.06);
+      backdrop-filter: blur(10px);
+      color: var(--accent-teal);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 1px solid rgba(102, 252, 241, 0.35);
+      text-decoration: none;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: var(--font-main);
+      letter-spacing: 0.03em;
+    }
+
+    .btn-glass:hover {
+      background: rgba(102, 252, 241, 0.12);
+      border-color: var(--accent-teal);
+      transform: translateY(-3px);
+      box-shadow: var(--glow-teal);
+      color: var(--accent-teal);
+    }
+
+    .hero-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-top: 56px;
+      animation: fadeInUp 0.7s ease 0.4s forwards;
+      opacity: 0;
+    }
+
+    .hero-stat-item { text-align: left; }
+
+    .hero-stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1;
+    }
+
+    .hero-stat-number span { color: var(--accent-teal); }
+
+    .hero-stat-label {
+      font-size: 0.75rem;
+      color: var(--text-silver);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    .hero-stat-divider {
+      width: 1px;
+      background: var(--border-subtle);
+      align-self: stretch;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .scroll-mouse {
+      width: 24px; height: 38px;
+      border: 2px solid rgba(102, 252, 241, 0.4);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-wheel {
+      width: 4px; height: 8px;
+      background: var(--accent-teal);
+      border-radius: 2px;
+      position: absolute;
+      top: 6px; left: 50%;
+      transform: translateX(-50%);
+      animation: scrollWheel 2s infinite;
+    }
+
+    .scroll-label {
+      font-size: 0.65rem;
+      color: rgba(197, 198, 199, 0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* ===================== SECTION COMMONS ===================== */
+    .section-pad { padding: 100px 0; }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent-teal);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 28px; height: 2px;
+      background: var(--accent-teal);
+      border-radius: 1px;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-title .highlight {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-desc {
+      font-size: 0.97rem;
+      color: var(--text-silver);
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    /* ===================== METRICS PILLARS ===================== */
+    #metrics {
+      background: var(--bg-secondary);
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #metrics::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+    }
+
+    #metrics::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+    }
+
+    .metric-card {
+      background: rgba(11, 12, 16, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 40px 30px;
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .metric-card:hover {
+      border-color: rgba(102, 252, 241, 0.4);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), var(--glow-teal);
+    }
+
+    .metric-card:hover::before { opacity: 1; }
+
+    .metric-icon-wrap {
+      width: 70px; height: 70px;
+      background: linear-gradient(135deg, rgba(102,252,241,0.1), rgba(69,243,255,0.05));
+      border: 1px solid rgba(102, 252, 241, 0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 1.8rem;
+      color: var(--accent-teal);
+      transition: var(--transition);
+    }
+
+    .metric-card:hover .metric-icon-wrap {
+      box-shadow: var(--glow-teal);
+      background: linear-gradient(135deg, rgba(102,252,241,0.2), rgba(69,243,255,0.1));
+    }
+
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .metric-value .accent { color: var(--accent-teal); }
+
+    .metric-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 10px;
+    }
+
+    .metric-desc {
+      font-size: 0.82rem;
+      color: var(--text-silver);
+      line-height: 1.6;
+    }
+
+    /* ===================== COURSES SECTION ===================== */
+    #courses { background: var(--bg-primary); }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 25px;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--text-silver);
+      font-family: var(--font-main);
+      font-size: 0.84rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      border-color: rgba(102,252,241,0.5);
+      color: var(--accent-teal);
+    }
+
+    .filter-btn.active {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      border-color: transparent;
+      color: var(--bg-primary);
+      font-weight: 700;
+      box-shadow: var(--glow-teal);
+    }
+
+    .course-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-card:hover {
+      border-color: rgba(102,252,241,0.35);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.4), var(--glow-teal);
+    }
+
+    .course-card-header {
+      padding: 30px 28px 24px;
+      position: relative;
+      background: linear-gradient(135deg, rgba(31,40,51,0.8), rgba(11,12,16,0.6));
+    }
+
+    .course-category-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .badge-ai { background: rgba(102,252,241,0.1); color: var(--accent-teal); border: 1px solid rgba(102,252,241,0.25); }
+    .badge-auto { background: rgba(69,243,255,0.1); color: var(--accent-blue); border: 1px solid rgba(69,243,255,0.25); }
+
+    .course-main-icon {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .course-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .course-desc {
+      font-size: 0.83rem;
+      color: var(--text-silver);
+      line-height: 1.7;
+    }
+
+    .course-card-body {
+      padding: 20px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .course-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .duration-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: var(--text-silver);
+    }
+
+    .duration-badge i { color: var(--accent-teal); }
+
+    .level-badge {
+      font-size: 0.7rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(102,252,241,0.08);
+      color: var(--accent-teal);
+      border: 1px solid rgba(102,252,241,0.2);
+      font-weight: 600;
+    }
+
+    .tech-stack-label {
+      font-size: 0.72rem;
+      color: var(--text-silver);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .tech-tag {
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(31,40,51,0.8);
+      border: 1px solid rgba(197,198,199,0.1);
+      color: var(--text-silver);
+      font-weight: 500;
+    }
+
+    .course-divider {
+      height: 1px;
+      background: var(--border-subtle);
+      margin-bottom: 20px;
+    }
+
+    .icon-deck {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .icon-deck-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .icon-deck-item i {
+      font-size: 1.3rem;
+      color: var(--accent-teal);
+    }
+
+    .icon-deck-item span {
+      font-size: 0.62rem;
+      color: var(--text-silver);
+      text-align: center;
+    }
+
+    .btn-syllabus {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(102,252,241,0.3);
+      background: transparent;
+      color: var(--accent-teal);
+      font-family: var(--font-main);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: auto;
+    }
+
+    .btn-syllabus:hover {
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      color: var(--bg-primary);
+      border-color: transparent;
+      box-shadow: var(--glow-teal);
+    }
+
+    /* ===================== WHY NETMAX SECTION ===================== */
+    #why-netmax {
+      background: var(--bg-secondary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #why-netmax::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(102,252,241,0.04) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      pointer-events: none;
+    }
+
+    .why-feature-item {
+      display: flex;
+      gap: 20px;
+      padding: 24px;
+      border-radius: 14px;
+      border: 1px solid transparent;
+      transition: var(--transition);
+      cursor: default;
+    }
+
+    .why-feature-item:hover {
+      background: rgba(11,12,16,0.5);
+      border-color: var(--border-subtle);
+    }
+
+    .why-icon-box {
+      width: 52px; height: 52px;
+      min-width: 52px;
+      background: linear-gradient(135deg, rgba(102,252,241,0.1), rgba(69,243,255,0.05));
+      border: 1px solid rgba(102,252,241,0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      color: var(--accent-teal);
+      transition: var(--transition);
+    }
+
+    .why-feature-item:hover .why-icon-box {
+      box-shadow: var(--glow-teal);
+      background: linear-gradient(135deg, rgba(102,252,241,0.18), rgba(69,243,255,0.08));
+    }
+
+    .why-feature-content h5 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 6px;
+    }
+
+    .why-feature-content p {
+      font-size: 0.83rem;
+      color: var(--text-silver);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .placement-card {
+      background: linear-gradient(135deg, rgba(102,252,241,0.06), rgba(69,243,255,0.03));
+      border: 1px solid rgba(102,252,241,0.2);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .placement-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle, rgba(102,252,241,0.05) 0%, transparent 60%);
+      animation: rotateBg 10s linear infinite;
+    }
+
+    .placement-number {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--text-white);
+      line-height: 1;
+    }
+
+    .placement-number span { color: var(--accent-teal); }
+
+    /* ===================== CONTACT / LOCATION ===================== */
+    #contact { background: var(--bg-primary); }
+
+    .contact-info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 48px 40px;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-info-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(102,252,241,0.04) 0%, transparent 70%);
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .contact-item:last-child { border-bottom: none; }
+
+    .contact-icon-box {
+      width: 44px; height: 44px;
+      min-width: 44px;
+      background: linear-gradient(135deg, rgba(102,252,241,0.1), rgba(69,243,255,0.05));
+      border: 1px solid rgba(102,252,241,0.2);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: var(--accent-teal);
+    }
+
+    .contact-item-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-silver);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .contact-item-value {
+      font-size: 0.95rem;
+      color: var(--text-white);
+      font-weight: 600;
+    }
+
+    .contact-item-value a {
+      color: var(--accent-teal);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-item-value a:hover {
+      color: var(--text-white);
+      text-shadow: var(--glow-teal);
+    }
+
+    .hours-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(102,252,241,0.08);
+      border: 1px solid rgba(102,252,241,0.2);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      color: var(--accent-teal);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .hours-dot {
+      width: 8px; height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    .map-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+      height: 100%;
+      min-height: 400px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-placeholder {
+      flex: 1;
+      background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-grid {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(102,252,241,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(102,252,241,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+
+    .map-pin-icon {
+      font-size: 3rem;
+      color: var(--accent-teal);
+      position: relative;
+      z-index: 1;
+      animation: bounce 2s ease infinite;
+      filter: drop-shadow(0 0 10px rgba(102,252,241,0.5));
+    }
+
+    .map-location-text {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .map-location-text h6 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 4px;
+    }
+
+    .map-location-text p {
+      font-size: 0.78rem;
+      color: var(--text-silver);
+      margin: 0;
+    }
+
+    .map-footer {
+      padding: 16px 24px;
+      background: rgba(11,12,16,0.5);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* ===================== FOOTER ===================== */
+    #footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding: 60px 0 0;
+    }
+
+    .footer-brand-desc {
+      font-size: 0.84rem;
+      color: var(--text-silver);
+      line-height: 1.7;
+      margin-top: 16px;
+      max-width: 280px;
+    }
+
+    .footer-heading {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-teal);
+      margin-bottom: 20px;
+    }
+
+    .footer-links { list-style: none; padding: 0; }
+
+    .footer-links li { margin-bottom: 10px; }
+
+    .footer-links a {
+      font-size: 0.84rem;
+      color: var(--text-silver);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-links a::before {
+      content: '';
+      display: block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border-subtle);
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover { color: var(--accent-teal); }
+    .footer-links a:hover::before { background: var(--accent-teal); }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .social-link {
+      width: 38px; height: 38px;
+      background: rgba(197,198,199,0.06);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-silver);
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: rgba(102,252,241,0.1);
+      border-color: rgba(102,252,241,0.4);
+      color: var(--accent-teal);
+      transform: translateY(-3px);
+      box-shadow: var(--glow-teal);
+    }
+
+    .footer-bottom {
+      margin-top: 50px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .footer-copyright {
+      font-size: 0.8rem;
+      color: var(--text-silver);
+    }
+
+    .footer-copyright span { color: var(--accent-teal); }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-bottom-links a {
+      font-size: 0.78rem;
+      color: var(--text-silver);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-bottom-links a:hover { color: var(--accent-teal); }
+
+    /* ===================== MODAL ===================== */
+    .modal-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, rgba(102,252,241,0.06), rgba(69,243,255,0.03));
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 24px 30px;
+    }
+
+    .modal-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .btn-close {
+      filter: invert(1) brightness(0.7);
+    }
+
+    .modal-body { padding: 30px; }
+
+    .form-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-silver);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+      background: rgba(31,40,51,0.8) !important;
+      border: 1px solid var(--border-subtle) !important;
+      border-radius: 8px !important;
+      color: var(--text-white) !important;
+      font-family: var(--font-main);
+      font-size: 0.88rem;
+      padding: 12px 16px;
+      transition: var(--transition);
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: rgba(102,252,241,0.5) !important;
+      box-shadow: 0 0 0 3px rgba(102,252,241,0.1) !important;
+      outline: none;
+    }
+
+    .form-control::placeholder { color: rgba(197,198,199,0.4); }
+
+    .form-select option { background: var(--bg-secondary); }
+
+    .modal-footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 20px 30px;
+    }
+
+    /* ===================== SYLLABUS MODAL ===================== */
+    #syllabusModal .modal-content { }
+    #syllabusModal .syllabus-course-name {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text-white);
+      margin-bottom: 6px;
+    }
+    #syllabusModal .syllabus-highlight { color: var(--accent-teal); }
+
+    .syllabus-module {
+      background: rgba(31,40,51,0.5);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+    }
+
+    .syllabus-module h6 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin-bottom: 6px;
+    }
+
+    .syllabus-module ul {
+      list-style: none; padding: 0; margin: 0;
+    }
+
+    .syllabus-module ul li {
+      font-size: 0.78rem;
+      color: var(--text-silver);
+      padding: 2px 0;
+      display: flex; align-items: center; gap: 6px;
+    }
+
+    .syllabus-module ul li::before {
+      content: '▸';
+      color: var(--accent-teal);
+      font-size: 0.7rem;
+    }
+
+    /* ===================== TOAST NOTIFICATION ===================== */
+    .toast-container {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 9999;
+    }
+
+    .custom-toast {
+      background: var(--bg-card);
+      border: 1px solid rgba(102,252,241,0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4), var(--glow-teal);
+      transform: translateX(120%);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      min-width: 280px;
+    }
+
+    .custom-toast.show { transform: translateX(0); }
+
+    .toast-icon { font-size: 1.5rem; color: var(--accent-teal); }
+
+    .toast-body h6 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-white);
+      margin: 0 0 2px;
+    }
+
+    .toast-body p {
+      font-size: 0.78rem;
+      color: var(--text-silver);
+      margin: 0;
+    }
+
+    /* ===================== BACK TO TOP ===================== */
+    #back-to-top {
+      position: fixed;
+      bottom: 28px; left: 24px;
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--accent-teal), var(--accent-blue));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--bg-primary);
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      box-shadow: var(--glow-teal);
+      z-index: 999;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+
+    #back-to-top.visible { opacity: 1; transform: translateY(0); }
+    #back-to-top:hover { transform: translateY(-3px); box-shadow: var(--glow-strong); }
+
+    /* ===================== ANIMATIONS ===================== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.85); }
+    }
+
+    @keyframes scrollWheel {
+      0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+      80% { opacity: 0; transform: translateX(-50%) translateY(14px); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(14px); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes rotateBg {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .fade-in-card { animation: fadeInCard 0.45s ease forwards; }
+
+    /* Card hidden state for filter */
+    .course-col { transition: opacity 0.3s ease; }
+    .course-col.hidden { display: none; }
+
+    /* ===================== GLOWING LINE DIVIDER ===================== */
+    .glow-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+      margin: 0;
+      opacity: 0.4;
+    }
+
+    /* ===================== TECH MARQUEE ===================== */
+    .marquee-section {
+      background: var(--bg-secondary);
+      padding: 24px 0;
+      overflow: hidden;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 60px;
+      animation: marqueeScroll 30s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-silver);
+      white-space: nowrap;
+    }
+
+    .marquee-item i { color: var(--accent-teal); font-size: 1rem; }
+
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ===================== RESPONSIVE ===================== */
+    @media (max-width: 991px) {
+      #announcement-bar .contact-links { display: none; }
+      .hero-content { padding: 100px 0 60px; }
+      .hero-stats { gap: 20px; }
+      .hero-stat-divider { display: none; }
+    }
+
+    @media (max-width: 767px) {
+      .section-pad { padding: 70px 0; }
+      .hero-headline { font-size: 2rem; }
+      .hero-cta-group { flex-direction: column; }
+      .btn-primary-glow, .btn-glass { width: 100%; justify-content: center; }
+      .metric-card { margin-bottom: 20px; }
+      .contact-info-card { padding: 30px 24px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 575px) {
+      #announcement-bar { display: none; }
+      .filter-tabs { justify-content: center; }
+      .placement-number { font-size: 3rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ===================== ANNOUNCEMENT BAR ===================== -->
+<div id="announcement-bar">
+  <div class="container-xl">
+    <div class="d-flex align-items-center justify-content-between">
+      <div>
+        <span class="brand-label">
+          <i class="fa-solid fa-microchip me-2"></i>Netmax Technologies
+        </span>
+        <span class="text-silver ms-2" style="font-size:0.76rem; color:var(--text-silver);">| Advanced Industrial Training & Placement Center</span>
+      </div>
+      <div class="contact-links d-flex align-items-center">
+        <span style="font-size:0.72rem; color:var(--text-silver); text-transform:uppercase; letter-spacing:0.06em; margin-right:8px;">Quick Connect:</span>
+        <a href="tel:+918699044666">
+          <i class="fa-solid fa-phone"></i>+91-8699044666
+        </a>
+        <a href="tel:01725012234">
+          <i class="fa-solid fa-headset"></i>0172-5012234
+        </a>
+        <a href="#contact" style="background:rgba(102,252,241,0.1);border:1px solid rgba(102,252,241,0.25);border-radius:4px;padding:3px 10px;margin-left:8px;">
+          <i class="fa-solid fa-envelope"></i>Inquire Now
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar navbar-expand-lg sticky-top" id="main-navbar">
+  <div class="container-xl">
+    <a class="navbar-brand" href="#hero">
+      <div class="brand-icon-wrap">
+        <i class="fa-solid fa-microchip"></i>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Netmax Technologies</div>
+        <div class="brand-tagline">Industrial Tech Hub</div>
+      </div>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-1 mb-3 mb-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="#hero">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#courses">Industrial Training</a></li>
+        <li class="nav-item"><a class="nav-link" href="#why-netmax">Automation</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item ms-lg-2">
+          <a class="nav-link nav-cta-btn" href="#" data-bs-toggle="modal" data-bs-target="#demoModal">
+            <i class="fa-solid fa-flask-vial me-1"></i>Free Lab Demo
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== HERO SECTION ===================== -->
+<section id="hero">
+  <!-- Three.js Canvas Container -->
+  <div id="three-canvas-container"></div>
+  <!-- Dark Overlay -->
+  <div class="hero-overlay"></div>
+
+  <div class="container-xl hero-content">
+    <div class="row align-items-center">
+      <div class="col-lg-7 col-xl-6">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          #1 Industrial Tech Training Hub — Chandigarh
+        </div>
+
+        <h1 class="hero-headline">
+          Master <span class="highlight">Next-Gen Engineering</span> & Industrial Tech Stacks
+        </h1>
+
+        <p class="hero-subtitle">
+          Step beyond basic coding. Get certified in hands-on Robotics, Artificial Intelligence, IoT, and Automation with live physical lab equipment and dedicated placement drives.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="#courses" class="btn-primary-glow">
+            <i class="fa-solid fa-layer-group"></i>
+            Explore Industrial Modules
+          </a>
+          <button class="btn-glass" data-bs-toggle="modal" data-bs-target="#demoModal">
+            <i class="fa-solid fa-vr-cardboard"></i>
+            Book A Free 3D Lab Demo
+          </button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat-item">
+            <div class="hero-stat-number">20<span>+</span></div>
+            <div class="hero-stat-label">Years Legacy</div>
+          </div>
+          <div class="hero-stat-divider d-none d-sm-block"></div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-number">15<span>K+</span></div>
+            <div class="hero-stat-label">Alumni Placed</div>
+          </div>
+          <div class="hero-stat-divider d-none d-sm-block"></div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-number">100<span>%</span></div>
+            <div class="hero-stat-label">Practical Focus</div>
+          </div>
+          <div class="hero-stat-divider d-none d-sm-block"></div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-number">50<span>+</span></div>
+            <div class="hero-stat-label">Active Partners</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator d-none d-md-flex">
+    <div class="scroll-mouse">
+      <div class="scroll-wheel"></div>
+    </div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</section>
+
+<!-- ===================== TECH MARQUEE ===================== -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marquee-track">
+    <div class="marquee-item"><i class="fa-solid fa-brain"></i> Artificial Intelligence</div>
+    <div class="marquee-item"><i class="fa-solid fa-robot"></i> Industrial Robotics</div>
+    <div class="marquee-item"><i class="fa-solid fa-network-wired"></i> IoT Engineering</div>
+    <div class="marquee-item"><i class="fa-solid fa-microchip"></i> Embedded Systems</div>
+    <div class="marquee-item"><i class="fa-solid fa-industry"></i> PLC & SCADA</div>
+    <div class="marquee-item"><i class="fa-solid fa-chart-line"></i> Data Science</div>
+    <div class="marquee-item"><i class="fa-solid fa-gear"></i> Automation Engineering</div>
+    <div class="marquee-item"><i class="fa-solid fa-code"></i> Advanced Python</div>
+    <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Motor Control Systems</div>
+    <div class="marquee-item"><i class="fa-solid fa-satellite-dish"></i> Sensor Integration</div>
+    <!-- Duplicate for seamless loop -->
+    <div class="marquee-item"><i class="fa-solid fa-brain"></i> Artificial Intelligence</div>
+    <div class="marquee-item"><i class="fa-solid fa-robot"></i> Industrial Robotics</div>
+    <div class="marquee-item"><i class="fa-solid fa-network-wired"></i> IoT Engineering</div>
+    <div class="marquee-item"><i class="fa-solid fa-microchip"></i> Embedded Systems</div>
+    <div class="marquee-item"><i class="fa-solid fa-industry"></i> PLC & SCADA</div>
+    <div class="marquee-item"><i class="fa-solid fa-chart-line"></i> Data Science</div>
+    <div class="marquee-item"><i class="fa-solid fa-gear"></i> Automation Engineering</div>
+    <div class="marquee-item"><i class="fa-solid fa-code"></i> Advanced Python</div>
+    <div class="marquee-item"><i class="fa-solid fa-bolt"></i> Motor Control Systems</div>
+    <div class="marquee-item"><i class="fa-solid fa-satellite-dish"></i> Sensor Integration</div>
+  </div>
+</div>
+
+<!-- ===================== METRICS PILLARS ===================== -->
+<section id="metrics">
+  <div class="container-xl">
+    <div class="text-center mb-5">
+      <div class="section-label justify-content-center">
+        <span>Why We Lead The Industry</span>
+      </div>
+      <h2 class="section-title">Built on <span class="highlight">Two Decades</span> of Technical Excellence</h2>
+      <p class="section-desc mx-auto">Four pillars that define why thousands of engineers and students choose Netmax Technologies to power their industrial careers.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-xl-3">
+        <div class="metric-card">
+          <div class="metric-icon-wrap">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <div class="metric-value">20<span class="accent">+</span></div>
+          <div class="metric-title">Years Legacy</div>
+          <p class="metric-desc">Pioneer in advanced technical education and hardware-software integration since 2003. Trusted by generations of engineers.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="metric-card">
+          <div class="metric-icon-wrap">
+            <i class="fa-solid fa-flask"></i>
+          </div>
+          <div class="metric-value"><span class="accent">Live</span></div>
+          <div class="metric-title">Hardware Labs</div>
+          <p class="metric-desc">Moving beyond simulations into physical IoT kits, PLC units, robotic arms, and real industrial-grade electronic panels.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="metric-card">
+          <div class="metric-icon-wrap">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="metric-value">15<span class="accent">K+</span></div>
+          <div class="metric-title">Alumni Network</div>
+          <p class="metric-desc">Technical careers successfully launched across top-tier multinational engineering, software, and manufacturing firms globally.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xl-3">
+        <div class="metric-card">
+          <div class="metric-icon-wrap">
+            <i class="fa-solid fa-bullseye"></i>
+          </div>
+          <div class="metric-value">100<span class="accent">%</span></div>
+          <div class="metric-title">Practical Focus</div>
+          <p class="metric-desc">Project-based curriculum built strictly around real-world industrial problem statements with zero theoretical padding.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COURSES SECTION ===================== -->
+<section id="courses" class="section-pad">
+  <div class="container-xl">
+    <div class="row align-items-end mb-5">
+      <div class="col-lg-7">
+        <div class="section-label">Course Catalogue</div>
+        <h2 class="section-title">
+          <span class="highlight">Industrial-Grade</span> Training Programmes
+        </h2>
+        <p class="section-desc">Each programme is engineered around active industry requirements, taught by domain experts with real deployment experience.</p>
+      </div>
+      <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+        <div class="d-inline-flex align-items-center gap-2" style="background:rgba(102,252,241,0.06);border:1px solid var(--border-subtle);border-radius:10px;padding:12px 20px;">
+          <i class="fa-solid fa-circle-check" style="color:var(--accent-teal);"></i>
+          <span style="font-size:0.82rem;color:var(--text-silver);">All programmes include <strong style="color:var(--text-white);">Placement Assistance</strong></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">
+        <i class="fa-solid fa-grip"></i> All Modules
+      </button>
+      <button class="filter-btn" data-filter="ai">
+        <i class="fa-solid fa-brain"></i> AI & Data Science
+      </button>
+      <button class="filter-btn" data-filter="iot">
+        <i class="fa-solid fa-network-wired"></i> IoT & Embedded
+      </button>
+      <button class="filter-btn" data-filter="automation">
+        <i class="fa-solid fa-industry"></i> PLC & Automation
+      </button>
+      <button class="filter-btn" data-filter="robotics">
+        <i class="fa-solid fa-robot"></i> Robotics
+      </button>
+    </div>
+
+    <!-- Course Cards Grid -->
+    <div class="row g-4" id="courses-grid">
+
+      <!-- Card 1: AI & ML -->
+      <div class="col-md-6 col-xl-3 course-col" data-category="ai">
+        <div class="course-card">
+          <div class="course-card-header">
+            <span class="course-category-badge badge-ai">
+              <i class="fa-solid fa-brain"></i> AI & Data Science
+            </span>
+            <div class="course-main-icon" style="color:#66fcf1;text-shadow:0 0 15px rgba(102,252,241,0.6);">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            <div class="course-title">Artificial Intelligence & Machine Learning</div>
+            <p class="course-desc">Deep dive into Python, neural networks, computer vision, NLP, and predictive data models with real deployment projects.</p>
+          </div>
+          <div class="course-card-body">
+            <div class="course-meta-row">
+              <span class="duration-badge"><i class="fa-regular fa-clock"></i> 4–6 Months</span>
+              <span class="level-badge">Advanced</span>
+            </div>
+            <div class="tech-stack-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">TensorFlow</span>
+              <span class="tech-tag">PyTorch</span>
+              <span class="tech-tag">OpenCV</span>
+              <span class="tech-tag">NLTK</span>
+            </div>
+            <div class="course-divider"></div>
+            <div class="icon-deck">
+              <div class="icon-deck-item"><i class="fa-solid fa-brain"></i><span>Neural Nets</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-eye"></i><span>Vision AI</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-chart-bar"></i><span>Analytics</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-comment-dots"></i><span>NLP</span></div>
+            </div>
+            <button class="btn-syllabus" onclick="openSyllabus('ai-ml')">
+              <i class="fa-solid fa-file-arrow-down"></i> Request Course Syllabus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: IoT -->
+      <div class="col-md-6 col-xl-3 course-col" data-category="iot">
+        <div class="course-card">
+          <div class="course-card-header">
+            <span class="course-category-badge badge-ai">
+              <i class="fa-solid fa-network-wired"></i> IoT & Embedded
+            </span>
+            <div class="course-main-icon" style="color:#45f3ff;text-shadow:0 0 15px rgba(69,243,255,0.6);">
+              <i class="fa-solid fa-network-wired"></i>
+            </div>
+            <div class="course-title">IoT & Embedded Systems Engineering</div>
+            <p class="course-desc">Bridge software and hardware with microcontrollers, sensor integration, Wi-Fi/Bluetooth modules, and smart automation systems.</p>
+          </div>
+          <div class="course-card-body">
+            <div class="course-meta-row">
+              <span class="duration-badge"><i class="fa-regular fa-clock"></i> 3–5 Months</span>
+              <span class="level-badge">Intermediate</span>
+            </div>
+            <div class="tech-stack-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">Arduino</span>
+              <span class="tech-tag">Raspberry Pi</span>
+              <span class="tech-tag">ESP32</span>
+              <span class="tech-tag">MQTT</span>
+              <span class="tech-tag">Zigbee</span>
+            </div>
+            <div class="course-divider"></div>
+            <div class="icon-deck">
+              <div class="icon-deck-item"><i class="fa-solid fa-microchip"></i><span>MCU</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-wifi"></i><span>Wireless</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-temperature-half"></i><span>Sensors</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-cloud"></i><span>Cloud IoT</span></div>
+            </div>
+            <button class="btn-syllabus" onclick="openSyllabus('iot')">
+              <i class="fa-solid fa-file-arrow-down"></i> Request Course Syllabus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: PLC & SCADA -->
+      <div class="col-md-6 col-xl-3 course-col" data-category="automation">
+        <div class="course-card">
+          <div class="course-card-header">
+            <span class="course-category-badge badge-auto">
+              <i class="fa-solid fa-industry"></i> Automation
+            </span>
+            <div class="course-main-icon" style="color:#66fcf1;text-shadow:0 0 15px rgba(102,252,241,0.6);">
+              <i class="fa-solid fa-industry"></i>
+            </div>
+            <div class="course-title">PLC, SCADA & Industrial Automation Stacks</div>
+            <p class="course-desc">Master industrial logic controllers, system monitoring frameworks, electrical panels, and complex hardware workflows for factory floors.</p>
+          </div>
+          <div class="course-card-body">
+            <div class="course-meta-row">
+              <span class="duration-badge"><i class="fa-regular fa-clock"></i> 4–5 Months</span>
+              <span class="level-badge">Professional</span>
+            </div>
+            <div class="tech-stack-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">Siemens PLC</span>
+              <span class="tech-tag">Allen Bradley</span>
+              <span class="tech-tag">WinCC</span>
+              <span class="tech-tag">HMI</span>
+              <span class="tech-tag">VFD</span>
+            </div>
+            <div class="course-divider"></div>
+            <div class="icon-deck">
+              <div class="icon-deck-item"><i class="fa-solid fa-gear"></i><span>PLC Logic</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-display"></i><span>SCADA</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-bolt"></i><span>Drives</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-diagram-project"></i><span>Ladder</span></div>
+            </div>
+            <button class="btn-syllabus" onclick="openSyllabus('plc')">
+              <i class="fa-solid fa-file-arrow-down"></i> Request Course Syllabus
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Robotics -->
+      <div class="col-md-6 col-xl-3 course-col" data-category="robotics">
+        <div class="course-card">
+          <div class="course-card-header">
+            <span class="course-category-badge badge-auto">
+              <i class="fa-solid fa-robot"></i> Robotics
+            </span>
+            <div class="course-main-icon" style="color:#45f3ff;text-shadow:0 0 15px rgba(69,243,255,0.6);">
+              <i class="fa-solid fa-robot"></i>
+            </div>
+            <div class="course-title">Robotics & Micro-Engineering Systems</div>
+            <p class="course-desc">Kinematics, robotic arm programming, motor control chips, servo calibration, and physical prototype manufacturing in-lab.</p>
+          </div>
+          <div class="course-card-body">
+            <div class="course-meta-row">
+              <span class="duration-badge"><i class="fa-regular fa-clock"></i> 5–6 Months</span>
+              <span class="level-badge">Advanced</span>
+            </div>
+            <div class="tech-stack-label">Tech Stack</div>
+            <div class="tech-tags">
+              <span class="tech-tag">ROS</span>
+              <span class="tech-tag">MATLAB</span>
+              <span class="tech-tag">SolidWorks</span>
+              <span class="tech-tag">Servo ICs</span>
+              <span class="tech-tag">KUKA</span>
+            </div>
+            <div class="course-divider"></div>
+            <div class="icon-deck">
+              <div class="icon-deck-item"><i class="fa-solid fa-robot"></i><span>Kinematics</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-cogs"></i><span>Motors</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-cube"></i><span>3D Design</span></div>
+              <div class="icon-deck-item"><i class="fa-solid fa-code"></i><span>ROS</span></div>
+            </div>
+            <button class="btn-syllabus" onclick="openSyllabus('robotics')">
+              <i class="fa-solid fa-file-arrow-down"></i> Request Course Syllabus
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /row -->
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ===================== WHY NETMAX ===================== -->
+<section id="why-netmax" class="section-pad">
+  <div class="container-xl">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="section-label">Our Differentiators</div>
+        <h2 class="section-title">The Netmax <span class="highlight">Advantage</span> — Built for the Real Industry</h2>
+        <p class="section-desc mb-4">Every aspect of our training ecosystem is reverse-engineered from what top hiring managers at industrial firms actually need.</p>
+
+        <div class="row g-0">
+          <div class="col-12">
+            <div class="why-feature-item">
+              <div class="why-icon-box"><i class="fa-solid fa-flask"></i></div>
+              <div class="why-feature-content">
+                <h5>Physical Lab Infrastructure</h5>
+                <p>Full access to PLC stations, robotic arms, IoT sensor kits, oscilloscopes, and industrial panel simulators. You build and test on real equipment, not screen mockups.</p>
+              </div>
+            </div>
+            <div class="why-feature-item">
+              <div class="why-icon-box"><i class="fa-solid fa-person-chalkboard"></i></div>
+              <div class="why-feature-content">
+                <h5>Industry Veteran Mentorship</h5>
+                <p>Learn directly from engineers who've deployed automation systems, designed embedded boards, and managed large-scale AI pipelines in production environments.</p>
+              </div>
+            </div>
+            <div class="why-feature-item">
+              <div class="why-icon-box"><i class="fa-solid fa-briefcase"></i></div>
+              <div class="why-feature-content">
+                <h5>Dedicated Placement Drive</h5>
+                <p>Structured mock interviews, industrial resume clinic, and direct referral pipelines to 50+ partner MNCs across Punjab, Haryana, Delhi NCR, and beyond.</p>
+              </div>
+            </div>
+            <div class="why-feature-item">
+              <div class="why-icon-box"><i class="fa-solid fa-certificate"></i></div>
+              <div class="why-feature-content">
+                <h5>Government-Recognized Certification</h5>
+                <p>Certificates acknowledged by NSDC and aligned with NIELIT frameworks, adding formal credential weight alongside practical expertise.</p>
+              </div>
+            </div>
+            <div class="why-feature-item">
+              <div class="why-icon-box"><i class="fa-solid fa-calendar-check"></i></div>
+              <div class="why-feature-content">
+                <h5>Flexible Batch Scheduling</h5>
+                <p>Morning, evening, and weekend batches available to accommodate working professionals, final-year B.Tech/Diploma students, and B.E. graduates.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="placement-card mb-4">
+          <div style="position:relative;z-index:1;">
+            <div style="font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent-teal);font-weight:700;margin-bottom:12px;">
+              <i class="fa-solid fa-trophy me-2"></i>Placement Achievement 2023–24
+            </div>
+            <div class="placement-number">15,000<span>+</span></div>
+            <div style="font-size:1.1rem;font-weight:600;color:var(--text-white);margin:8px 0 4px;">Engineers Successfully Placed</div>
+            <div style="font-size:0.84rem;color:var(--text-silver);">Across top-tier multinational firms in engineering, automation & software sectors</div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-6">
+            <div style="background:var(--bg-primary);border:1px solid var(--border-subtle);border-radius:14px;padding:22px;text-align:center;transition:var(--transition);" class="metric-card-mini">
+              <div style="font-size:2rem;font-weight:800;color:var(--text-white);">50<span style="color:var(--accent-teal);">+</span></div>
+              <div style="font-size:0.78rem;color:var(--text-silver);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px;">Hiring Partners</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div style="background:var(--bg-primary);border:1px solid var(--border-subtle);border-radius:14px;padding:22px;text-align:center;transition:var(--transition);" class="metric-card-mini">
+              <div style="font-size:2rem;font-weight:800;color:var(--text-white);">98<span style="color:var(--accent-teal);">%</span></div>
+              <div style="font-size:0.78rem;color:var(--text-silver);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px;">Satisfaction Rate</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div style="background:var(--bg-primary);border:1px solid var(--border-subtle);border-radius:14px;padding:22px;text-align:center;transition:var(--transition);" class="metric-card-mini">
+              <div style="font-size:2rem;font-weight:800;color:var(--text-white);">4<span style="color:var(--accent-teal);">+</span></div>
+              <div style="font-size:0.78rem;color:var(--text-silver);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px;">Lab Domains</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div style="background:var(--bg-primary);border:1px solid var(--border-subtle);border-radius:14px;padding:22px;text-align:center;transition:var(--transition);" class="metric-card-mini">
+              <div style="font-size:2rem;font-weight:800;color:var(--text-white);">12<span style="color:var(--accent-teal);">H</span></div>
+              <div style="font-size:0.78rem;color:var(--text-silver);text-transform:uppercase;letter-spacing:0.06em;margin-top:4px;">Open Daily</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="glow-divider"></div>
+
+<!-- ===================== CONTACT & LOCATION ===================== -->
+<section id="contact" class="section-pad">
+  <div class="container-xl">
+    <div class="text-center mb-5">
+      <div class="section-label justify-content-center">Get In Touch</div>
+      <h2 class="section-title">Visit Our <span class="highlight">Chandigarh Hub</span></h2>
+      <p class="section-desc mx-auto">Walk into our lab facility, meet our mentors, and experience the training infrastructure firsthand — no appointment needed.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="contact-info-card">
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <div style="width:48px;height:48px;background:linear-gradient(135deg,var(--accent-teal),var(--accent-blue));border-radius:10px;display:flex;align-items:center;justify-content:center;color:var(--bg-primary);font-size:1.3rem;">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <div style="font-size:1.1rem;font-weight:700;color:var(--text-white);">Netmax Technologies</div>
+              <div style="font-size:0.78rem;color:var(--accent-teal);font-weight:600;">Main Training Campus</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon-box"><i class="fa-solid fa-map-pin"></i></div>
+            <div>
+              <div class="contact-item-label">Address</div>
+              <div class="contact-item-value">Sector 34A, Sector 34,<br>Chandigarh — 160022</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon-box"><i class="fa-solid fa-phone-volume"></i></div>
+            <div>
+              <div class="contact-item-label">Direct Helpline</div>
+              <div class="contact-item-value">
+                <a href="tel:+918699044666">+91-8699044666</a><br>
+                <a href="tel:01725012234" style="font-size:0.88rem;">0172-5012234</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon-box"><i class="fa-solid fa-envelope-open-text"></i></div>
+            <div>
+              <div class="contact-item-label">Email Enquiry</div>
+              <div class="contact-item-value">
+                <a href="mailto:info@netmaxtech.com">info@netmaxtech.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon-box"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <div class="contact-item-label">Operating Hours</div>
+              <div class="contact-item-value">
+                <div class="hours-badge">
+                  <div class="hours-dot"></div>
+                  Open Daily: 8:00 AM – 8:00 PM
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <a href="tel:+918699044666" class="btn-primary-glow d-inline-flex" style="width:100%;justify-content:center;text-decoration:none;">
+              <i class="fa-solid fa-phone"></i> Call Centre Directly
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="map-card">
+          <div class="map-placeholder">
+            <div class="map-grid"></div>
+            <div class="map-pin-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div class="map-location-text">
+              <h6>Netmax Technologies</h6>
+              <p>Sector 34A, Chandigarh — 160022</p>
+            </div>
+          </div>
+          <div class="map-footer">
+            <a href="https://maps.google.com/?q=Netmax+Technologies+Sector+34+Chandigarh" target="_blank" class="btn-glass d-flex align-items-center justify-content-center gap-2" style="text-decoration:none;font-size:0.82rem;">
+              <i class="fa-solid fa-map"></i> Open in Google Maps
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:20px;padding:30px;height:100%;">
+          <div style="font-size:0.85rem;font-weight:700;color:var(--accent-teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:20px;">Quick Enquiry</div>
+
+          <form id="quick-enquiry-form" novalidate>
+            <div class="mb-3">
+              <input type="text" class="form-control" placeholder="Your Full Name" required>
+            </div>
+            <div class="mb-3">
+              <input type="tel" class="form-control" placeholder="Mobile Number" required>
+            </div>
+            <div class="mb-3">
+              <select class="form-select">
+                <option value="" selected disabled>Select Programme</option>
+                <option>AI & Machine Learning</option>
+                <option>IoT & Embedded Systems</option>
+                <option>PLC, SCADA & Automation</option>
+                <option>Robotics & Micro-Engineering</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control" rows="3" placeholder="Your query or message..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary-glow w-100 justify-content-center" style="border:none;font-size:0.88rem;">
+              <i class="fa-solid fa-paper-plane"></i> Send Enquiry
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer id="footer">
+  <div class="container-xl">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <a class="navbar-brand mb-3 d-inline-flex" href="#hero">
+          <div class="brand-icon-wrap me-2">
+            <i class="fa-solid fa-microchip"></i>
+          </div>
+          <div class="brand-text">
+            <div class="brand-name">Netmax Technologies</div>
+            <div class="brand-tagline">Industrial Tech Hub</div>
+          </div>
+        </a>
+        <p class="footer-brand-desc">
+          Chandigarh's premier advanced industrial training and placement center since 2003. Transforming engineering graduates into industry-ready professionals through hands-on, hardware-first education.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-link" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-link" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Programmes</div>
+        <ul class="footer-links">
+          <li><a href="#courses">AI & Machine Learning</a></li>
+          <li><a href="#courses">IoT & Embedded</a></li>
+          <li><a href="#courses">PLC & SCADA</a></li>
+          <li><a href="#courses">Robotics Engineering</a></li>
+          <li><a href="#courses">Data Science</a></li>
+          <li><a href="#courses">Python Programming</a></li>
+        </ul>
+      </div>
+
+      <div class="col-6 col-lg-2">
+        <div class="footer-heading">Company</div>
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#metrics">About Us</a></li>
+          <li><a href="#why-netmax">Why Netmax</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Placement Record</a></li>
+          <li><a href="#">Blog & Resources</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="footer-heading">Stay Updated</div>
+        <p style="font-size:0.83rem;color:var(--text-silver);margin-bottom:16px;line-height:1.6;">Subscribe for new batch announcements, industry project kits, and exclusive Netmax lab event notifications.</p>
+        <div class="d-flex gap-2">
+          <input type="email" class="form-control" placeholder="Enter your email address" style="flex:1;">
+          <button class="btn-primary-glow" style="border:none;padding:12px 18px;white-space:nowrap;font-size:0.82rem;" onclick="handleSubscribe(this)">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+        <div style="margin-top:20px;padding:16px;background:rgba(102,252,241,0.04);border:1px solid var(--border-subtle);border-radius:10px;">
+          <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--accent-teal);font-weight:700;margin-bottom:8px;">
+            <i class="fa-solid fa-clock me-1"></i> Centre Hours
+          </div>
+          <div style="font-size:0.88rem;color:var(--text-white);font-weight:600;">Open Daily: 8:00 AM – 8:00 PM</div>
+          <div style="font-size:0.78rem;color:var(--text-silver);margin-top:4px;">Including Saturdays & Sundays</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copyright">
+        © 2024 <span>Netmax Technologies</span>. All rights reserved. | Sector 34A, Chandigarh — 160022
+      </div>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Refund Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== DEMO MODAL ===================== -->
+<div class="modal fade" id="demoModal" tabindex="-1" aria-labelledby="demoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title" id="demoModalLabel">
+            <i class="fa-solid fa-vr-cardboard me-2" style="color:var(--accent-teal);"></i>
+            Book Your Free 3D Lab Demo Session
+          </h5>
+          <p style="font-size:0.8rem;color:var(--text-silver);margin:4px 0 0;">Reserve your slot to experience live PLC, IoT, and Robotics equipment in our Chandigarh lab facility.</p>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="demo-form" novalidate>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" placeholder="e.g., Rahul Sharma" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Contact Number *</label>
+              <input type="tel" class="form-control" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-control" placeholder="your@email.com" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Current Qualification</label>
+              <select class="form-select">
+                <option value="" selected disabled>Select your level</option>
+                <option>B.Tech / B.E. Graduate</option>
+                <option>B.Tech / B.E. Final Year</option>
+                <option>Diploma Engineering</option>
+                <option>Working Professional</option>
+                <option>M.Tech / Post Graduate</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Interested Programme *</label>
+              <select class="form-select" required>
+                <option value="" selected disabled>Choose a domain</option>
+                <option>Artificial Intelligence & Machine Learning</option>
+                <option>IoT & Embedded Systems</option>
+                <option>PLC, SCADA & Industrial Automation</option>
+                <option>Robotics & Micro-Engineering</option>
+                <option>Combined Industrial Tech Package</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Preferred Demo Date</label>
+              <input type="date" class="form-control">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Additional Notes</label>
+              <textarea class="form-control" rows="3" placeholder="Tell us about your background, goals, or any specific queries you'd like addressed during the demo..."></textarea>
+            </div>
+            <div class="col-12">
+              <div style="background:rgba(102,252,241,0.05);border:1px solid var(--border-subtle);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:12px;">
+                <i class="fa-solid fa-shield-halved" style="color:var(--accent-teal);font-size:1.2rem;"></i>
+                <span style="font-size:0.78rem;color:var(--text-silver);">Your data is 100% secure. We never share your information with third parties. No spam — only relevant course updates.</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-glass" data-bs-dismiss="modal" style="font-size:0.86rem;">
+          Cancel
+        </button>
+        <button type="button" class="btn-primary-glow" onclick="submitDemoForm()" style="font-size:0.86rem;border:none;">
+          <i class="fa-solid fa-calendar-check"></i> Confirm Demo Booking
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SYLLABUS MODAL ===================== -->
+<div class="modal fade" id="syllabusModal" tabindex="-1" aria-labelledby="syllabusModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h5 class="modal-title" id="syllabusModalLabel">
+            <i class="fa-solid fa-file-lines me-2" style="color:var(--accent-teal);"></i>
+            Course Syllabus Overview
+          </h5>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="syllabus-content">
+        <!-- Dynamically populated -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-glass" data-bs-dismiss="modal" style="font-size:0.86rem;">Close</button>
+        <button type="button" class="btn-primary-glow" onclick="requestFullSyllabus()" style="font-size:0.86rem;border:none;">
+          <i class="fa-solid fa-envelope"></i> Email Full Syllabus to Me
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TOAST ===================== -->
+<div class="toast-container">
+  <div class="custom-toast" id="success-toast">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <div class="toast-body">
+      <h6 id="toast-title">Request Submitted!</h6>
+      <p id="toast-message">Our team will reach out within 24 hours.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Back to Top -->
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to Top">
+  <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<!-- ===================== CDN SCRIPTS ===================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* ============================================================
+   THREE.JS — INTERACTIVE PARTICLE CONSTELLATION
+   ============================================================ */
+(function () {
+  const container = document.getElementById('three-canvas-container');
+
+  // Scene
+  const scene = new THREE.Scene();
+
+  // Camera
+  const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 2000);
+  camera.position.z = 280;
+
+  // Renderer
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setClearColor(0x000000, 0);
+  container.appendChild(renderer.domElement);
+
+  /* ---- PARTICLES ---- */
+  const PARTICLE_COUNT = 280;
+  const CONNECT_DIST = 90;
+  const positions = [];
+  const velocities = [];
+  const particleData = [];
+
+  const geom = new THREE.BufferGeometry();
+  const posArray = new Float32Array(PARTICLE_COUNT * 3);
+  const colArray = new Float32Array(PARTICLE_COUNT * 3);
+
+  const c1 = new THREE.Color('#66fcf1');
+  const c2 = new THREE.Color('#45f3ff');
+  const c3 = new THREE.Color('#c5c6c7');
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    const x = (Math.random() - 0.5) * 600;
+    const y = (Math.random() - 0.5) * 400;
+    const z = (Math.random() - 0.5) * 200;
+    positions.push(x, y, z);
+    posArray[i * 3] = x;
+    posArray[i * 3 + 1] = y;
+    posArray[i * 3 + 2] = z;
+
+    velocities.push(
+      (Math.random() - 0.5) * 0.18,
+      (Math.random() - 0.5) * 0.12,
+      (Math.random() - 0.5) * 0.06
+    );
+
+    const rnd = Math.random();
+    const col = rnd < 0.5 ? c1 : rnd < 0.8 ? c2 : c3;
+    colArray[i * 3] = col.r;
+    colArray[i * 3 + 1] = col.g;
+    colArray[i * 3 + 2] = col.b;
+
+    particleData.push({ x, y, z, vx: velocities[i * 3], vy: velocities[i * 3 + 1], vz: velocities[i * 3 + 2] });
+  }
+
+  geom.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+  geom.setAttribute('color', new THREE.BufferAttribute(colArray, 3));
+
+  const mat = new THREE.PointsMaterial({
+    size: 2.4,
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.85,
+    sizeAttenuation: true,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+
+  const points = new THREE.Points(geom, mat);
+  scene.add(points);
+
+  /* ---- CONNECTING LINES ---- */
+  const lineMat = new THREE.LineBasicMaterial({
+    color: 0x66fcf1,
+    transparent: true,
+    opacity: 0.0,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+
+  // We'll use a dynamic lines approach
+  const lineGeom = new THREE.BufferGeometry();
+  const MAX_LINES = PARTICLE_COUNT * 4;
+  const linePositions = new Float32Array(MAX_LINES * 6);
+  const lineOpacities = new Float32Array(MAX_LINES);
+  lineGeom.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
+  lineGeom.setDrawRange(0, 0);
+
+  const lineSegments = new THREE.LineSegments(lineGeom, new THREE.LineBasicMaterial({
+    color: 0x66fcf1,
+    transparent: true,
+    opacity: 0.15,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  }));
+  scene.add(lineSegments);
+
+  /* ---- MOUSE INTERACTION ---- */
+  const mouse = { x: 0, y: 0 };
+  const targetRotation = { x: 0, y: 0 };
+  const currentRotation = { x: 0, y: 0 };
+
+  window.addEventListener('mousemove', (e) => {
+    mouse.x = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouse.y = -(e.clientY / window.innerHeight - 0.5) * 2;
+    targetRotation.y = mouse.x * 0.18;
+    targetRotation.x = mouse.y * 0.10;
+  });
+
+  /* ---- RESIZE ---- */
+  window.addEventListener('resize', () => {
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+
+  /* ---- ANIMATION LOOP ---- */
+  let lineCount = 0;
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const delta = clock.getDelta();
+    const elapsed = clock.getElapsedTime();
+
+    // Smooth camera rotation
+    currentRotation.x += (targetRotation.x - currentRotation.x) * 0.04;
+    currentRotation.y += (targetRotation.y - currentRotation.y) * 0.04;
+    scene.rotation.x = currentRotation.x;
+    scene.rotation.y = currentRotation.y;
+
+    // Subtle autonomous drift
+    scene.rotation.y += 0.0008;
+
+    // Update particles
+    const pos = geom.attributes.position.array;
+    lineCount = 0;
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = particleData[i];
+
+      // Wave motion
+      p.x += p.vx + Math.sin(elapsed * 0.4 + i * 0.2) * 0.015;
+      p.y += p.vy + Math.cos(elapsed * 0.3 + i * 0.15) * 0.012;
+      p.z += p.vz;
+
+      // Mouse gravitational pull (subtle)
+      const mx = mouse.x * 160;
+      const my = mouse.y * 100;
+      p.x += (mx - p.x) * 0.00015;
+      p.y += (my - p.y) * 0.00015;
+
+      // Boundary wrap
+      if (p.x > 300) p.x = -300;
+      if (p.x < -300) p.x = 300;
+      if (p.y > 200) p.y = -200;
+      if (p.y < -200) p.y = 200;
+      if (p.z > 100) p.z = -100;
+      if (p.z < -100) p.z = 100;
+
+      pos[i * 3] = p.x;
+      pos[i * 3 + 1] = p.y;
+      pos[i * 3 + 2] = p.z;
+    }
+    geom.attributes.position.needsUpdate = true;
+
+    // Build connection lines
+    const lp = lineGeom.attributes.position.array;
+    lineCount = 0;
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      for (let j = i + 1; j < PARTICLE_COUNT; j++) {
+        if (lineCount >= MAX_LINES) break;
+        const dx = particleData[i].x - particleData[j].x;
+        const dy = particleData[i].y - particleData[j].y;
+        const dz = particleData[i].z - particleData[j].z;
+        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (dist < CONNECT_DIST) {
+          lp[lineCount * 6] = particleData[i].x;
+          lp[lineCount * 6 + 1] = particleData[i].y;
+          lp[lineCount * 6 + 2] = particleData[i].z;
+          lp[lineCount * 6 + 3] = particleData[j].x;
+          lp[lineCount * 6 + 4] = particleData[j].y;
+          lp[lineCount * 6 + 5] = particleData[j].z;
+          lineCount++;
+        }
+      }
+    }
+
+    lineGeom.attributes.position.needsUpdate = true;
+    lineGeom.setDrawRange(0, lineCount * 2);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+})();
+
+
+/* ============================================================
+   NAVBAR SCROLL BEHAVIOR
+   ============================================================ */
+const navbar = document.getElementById('main-navbar');
+const backToTop = document.getElementById('back-to-top');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 80) {
+    navbar.classList.add('scrolled');
+    backToTop.classList.add('visible');
+  } else {
+    navbar.classList.remove('scrolled');
+    backToTop.classList.remove('visible');
+  }
+
+  // Active nav link based on scroll position
+  const sections = ['hero', 'courses', 'why-netmax', 'contact'];
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.nav-cta-btn)');
+
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      const top = el.getBoundingClientRect().top;
+      if (top <= 100) current = id;
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    const href = link.getAttribute('href');
+    if (href && href.includes(current)) {
+      link.classList.add('active');
+    }
+  });
+});
+
+
+/* ============================================================
+   COURSE FILTER TABS — VANILLA JS
+   ============================================================ */
+const filterBtns = document.querySelectorAll('.filter-btn');
+const courseCols = document.querySelectorAll('.course-col');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', function () {
+    // Update active button
+    filterBtns.forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+
+    const filter = this.dataset.filter;
+
+    courseCols.forEach((col, index) => {
+      const category = col.dataset.category;
+      const shouldShow = filter === 'all' || category === filter;
+
+      if (shouldShow) {
+        col.classList.remove('hidden');
+        const card = col.querySelector('.course-card');
+        if (card) {
+          card.style.animation = 'none';
+          card.offsetHeight; // Reflow
+          card.style.animation = '';
+          card.classList.add('fade-in-card');
+          setTimeout(() => card.classList.remove('fade-in-card'), 500);
+        }
+      } else {
+        col.classList.add('hidden');
+      }
+    });
+  });
+});
+
+
+/* ============================================================
+   SYLLABUS DATA & MODAL
+   ============================================================ */
+const syllabusData = {
+  'ai-ml': {
+    title: 'Artificial Intelligence & Machine Learning',
+    icon: 'fa-brain',
+    duration: '4–6 Months',
+    modules: [
+      { title: 'Module 1: Python for AI & Data Engineering', topics: ['Advanced Python OOP & Functional Programming', 'NumPy, Pandas, Matplotlib Stack', 'Data Wrangling & Feature Engineering', 'Statistical Analysis & Probability'] },
+      { title: 'Module 2: Core Machine Learning Algorithms', topics: ['Supervised Learning: Regression & Classification', 'Unsupervised Clustering & Dimensionality Reduction', 'Ensemble Methods: Random Forest, XGBoost', 'Model Evaluation: Cross-Validation & Metrics'] },
+      { title: 'Module 3: Deep Learning & Neural Networks', topics: ['ANN Architecture & Backpropagation', 'Convolutional Neural Networks (CNNs)', 'Recurrent Networks & LSTM for Sequences', 'Transfer Learning with Pre-trained Models'] },
+      { title: 'Module 4: Computer Vision & NLP', topics: ['OpenCV: Image Processing & Object Detection', 'YOLO & SSD Real-Time Detection', 'Natural Language Processing with NLTK & SpaCy', 'Transformer Architecture & BERT Basics'] },
+      { title: 'Module 5: Deployment & MLOps', topics: ['Flask & FastAPI for ML Model Serving', 'Docker Containerization for AI Apps', 'Cloud Deployment on AWS SageMaker', 'CI/CD Pipeline for Machine Learning'] }
+    ]
+  },
+  'iot': {
+    title: 'IoT & Embedded Systems Engineering',
+    icon: 'fa-network-wired',
+    duration: '3–5 Months',
+    modules: [
+      { title: 'Module 1: Embedded C & Microcontrollers', topics: ['Embedded C Programming Fundamentals', 'GPIO, Timers, ADC, PWM Configuration', 'ARM Cortex-M Architecture Overview', 'Interrupt Handling & RTOS Basics'] },
+      { title: 'Module 2: Arduino & Raspberry Pi Platforms', topics: ['Arduino IDE & Hardware Prototyping', 'Sensor Integration: DHT11, LDR, Ultrasonic, PIR', 'Raspberry Pi GPIO & Linux Shell Commands', 'Python Scripts for Hardware Control'] },
+      { title: 'Module 3: Wireless Communication Protocols', topics: ['Wi-Fi Module: ESP8266/ESP32 AT Commands', 'Bluetooth & BLE Pairing & Data Transfer', 'MQTT Protocol for IoT Message Queuing', 'LoRa & Zigbee Long-Range Communication'] },
+      { title: 'Module 4: Smart Systems & Cloud IoT', topics: ['AWS IoT Core & Device Shadow Management', 'Firebase Realtime Database for IoT', 'Edge Computing & Local Data Processing', 'Industrial IoT (IIoT) Architecture Patterns'] },
+      { title: 'Module 5: Capstone Project', topics: ['Smart Home Automation System Build', 'Industrial Machine Health Monitor', 'Air Quality & Environmental Sensing Array', 'Full PCB Design & Soldering Lab'] }
+    ]
+  },
+  'plc': {
+    title: 'PLC, SCADA & Industrial Automation',
+    icon: 'fa-industry',
+    duration: '4–5 Months',
+    modules: [
+      { title: 'Module 1: Electrical Engineering Foundations', topics: ['AC/DC Circuit Analysis & Troubleshooting', 'Contactors, Relays, Timers & MCBs', 'Motor Starter Circuits & Control Panels', 'Earthing Systems & Electrical Safety Protocols'] },
+      { title: 'Module 2: PLC Programming (Siemens & Allen Bradley)', topics: ['Ladder Logic Diagram Programming', 'Function Block & Structured Text Languages', 'Siemens S7-1200 / S7-300 Configuration', 'Allen Bradley Micro820 & RSLogix 5000'] },
+      { title: 'Module 3: SCADA & HMI Systems', topics: ['WinCC & FactoryTalk View ME Configuration', 'HMI Screen Design & Tag Configuration', 'OPC UA Data Communication Standards', 'Alarm Management & Historian Logging'] },
+      { title: 'Module 4: Industrial Drives & Instrumentation', topics: ['Variable Frequency Drive (VFD) Programming', 'PID Loop Tuning for Process Control', 'Pressure, Temperature & Flow Transmitters', 'Fieldbus: Profibus, Modbus, DeviceNet'] },
+      { title: 'Module 5: Automation Project Build', topics: ['Conveyor Belt Automation System', 'Industrial Water Treatment PLC Simulation', 'Panel Wiring & Control Cabinet Build', 'Live Factory Floor Observation Visit'] }
+    ]
+  },
+  'robotics': {
+    title: 'Robotics & Micro-Engineering Systems',
+    icon: 'fa-robot',
+    duration: '5–6 Months',
+    modules: [
+      { title: 'Module 1: Robotics Fundamentals & Kinematics', topics: ['Robot Classifications & Workspace Analysis', 'Forward & Inverse Kinematics (2D/3D)', 'Denavit-Hartenberg (D-H) Parameter Method', 'MATLAB Robotics Toolbox Simulations'] },
+      { title: 'Module 2: Motor Control & Actuation Systems', topics: ['DC, Stepper & Servo Motor Drive Circuits', 'H-Bridge Motor Driver IC Programming', 'Encoder Feedback & Closed-Loop Control', 'Pneumatic Actuators & Hydraulic Circuits'] },
+      { title: 'Module 3: Robot Operating System (ROS)', topics: ['ROS Architecture: Nodes, Topics, Services', 'URDF Robot Modeling & RViz Visualization', 'Navigation Stack: SLAM & Path Planning', 'Gazebo Physics Simulation Environment'] },
+      { title: 'Module 4: Machine Vision for Robotics', topics: ['Camera Calibration & 3D Point Cloud', 'Object Detection & Localization for Pick & Place', 'Force-Torque Sensing & Collision Detection', 'Collaborative Robot (Cobot) Safety Standards'] },
+      { title: 'Module 5: Prototype Manufacturing & Integration', topics: ['3D Design with SolidWorks / Fusion 360', '3D Printing & CNC Milling for Prototypes', 'Full Robotic Arm Build & Programming', 'Autonomous Line-Following & Sorting Robot'] }
+    ]
+  }
+};
+
+function openSyllabus(type) {
+  const data = syllabusData[type];
+  if (!data) return;
+
+  let modulesHTML = '';
+  data.modules.forEach(mod => {
+    const topicsHTML = mod.topics.map(t => `<li>${t}</li>`).join('');
+    modulesHTML += `
+      <div class="syllabus-module">
+        <h6><i class="fa-solid fa-bookmark me-2" style="color:var(--accent-teal);font-size:0.75rem;"></i>${mod.title}</h6>
+        <ul>${topicsHTML}</ul>
+      </div>
+    `;
+  });
+
+  document.getElementById('syllabus-content').innerHTML = `
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <div style="width:56px;height:56px;background:linear-gradient(135deg,rgba(102,252,241,0.15),rgba(69,243,255,0.08));border:1px solid rgba(102,252,241,0.3);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--accent-teal);">
+        <i class="fa-solid ${data.icon}"></i>
+      </div>
+      <div>
+        <div class="syllabus-course-name">${data.title}</div>
+        <div style="display:flex;gap:10px;align-items:center;margin-top:4px;">
+          <span style="font-size:0.78rem;color:var(--text-silver);"><i class="fa-regular fa-clock me-1" style="color:var(--accent-teal);"></i>${data.duration}</span>
+          <span style="font-size:0.78rem;background:rgba(102,252,241,0.1);color:var(--accent-teal);padding:3px 10px;border-radius:10px;border:1px solid rgba(102,252,241,0.2);">Includes Placement Support</span>
+        </div>
+      </div>
+    </div>
+    <div style="height:1px;background:var(--border-subtle);margin-bottom:20px;"></div>
+    ${modulesHTML}
+    <div style="background:rgba(102,252,241,0.05);border:1px solid var(--border-subtle);border-radius:10px;padding:14px 18px;margin-top:8px;display:flex;align-items:center;gap:10px;">
+      <i class="fa-solid fa-circle-info" style="color:var(--accent-teal);"></i>
+      <span style="font-size:0.78rem;color:var(--text-silver);">This is an overview. Click <strong style="color:var(--text-white);">"Email Full Syllabus"</strong> to receive the complete week-by-week module breakdown and project specifications.</span>
+    </div>
+  `;
+
+  const modal = new bootstrap.Modal(document.getElementById('syllabusModal'));
+  modal.show();
+}
+
+function requestFullSyllabus() {
+  bootstrap.Modal.getInstance(document.getElementById('syllabusModal')).hide();
+  setTimeout(() => {
+    showToast('Syllabus Requested!', 'Full syllabus will be emailed to you within 2 hours.');
+    const demoModal = new bootstrap.Modal(document.getElementById('demoModal'));
+    demoModal.show();
+  }, 400);
+}
+
+
+/* ============================================================
+   FORM SUBMISSIONS
+   ============================================================ */
+function submitDemoForm() {
+  const modal = bootstrap.Modal.getInstance(document.getElementById('demoModal'));
+  modal.hide();
+  setTimeout(() => {
+    showToast('Demo Booked!', 'Our team will confirm your slot within 24 hours via call & SMS.');
+  }, 400);
+}
+
+document.getElementById('quick-enquiry-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+  showToast('Enquiry Sent!', 'Our counsellor will contact you within 2 hours.');
+  this.reset();
+});
+
+function handleSubscribe(btn) {
+  const input = btn.previousElementSibling;
+  if (input.value && input.value.includes('@')) {
+    showToast('Subscribed!', 'You\'ll receive batch announcements and lab event updates.');
+    input.value = '';
+  } else {
+    input.style.borderColor = 'rgba(255,100,100,0.5)';
+    setTimeout(() => input.style.borderColor = '', 2000);
+  }
+}
+
+
+/* ============================================================
+   TOAST NOTIFICATION
+   ============================================================ */
+function showToast(title, message) {
+  const toast = document.getElementById('success-toast');
+  document.getElementById('toast-title').textContent = title;
+  document.getElementById('toast-message').textContent = message;
+
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 4000);
+}
+
+
+/* ============================================================
+   INTERSECTION OBSERVER — SCROLL ANIMATIONS
+   ============================================================ */
+const observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.12
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+// Animate metric cards
+document.querySelectorAll('.metric-card, .why-feature-item, .contact-info-card, .map-card').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = `opacity 0.6s ease ${i * 0.08}s, transform 0.6s ease ${i * 0.08}s`;
+  observer.observe(el);
+});
+
+// Animate course cards
+document.querySelectorAll('.course-card').forEach((el, i) => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(25px)';
+  el.style.transition = `opacity 0.55s ease ${i * 0.1}s, transform 0.55s ease ${i * 0.1}s`;
+  observer.observe(el);
+});
+
+
+/* ============================================================
+   COUNTER ANIMATION
+   ============================================================ */
+function animateCounter(el, target, suffix, duration = 1500) {
+  let start = 0;
+  const increment = target / (duration / 16);
+  const update = () => {
+    start += increment;
+    if (start < target) {
+      el.textContent = Math.floor(start) + suffix;
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = target + suffix;
+    }
+  };
+  requestAnimationFrame(update);
+}
+
+// Trigger counter when metrics section comes into view
+const metricsSection = document.getElementById('metrics');
+const metricObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    const heroStats = document.querySelectorAll('.hero-stat-number');
+    // Hero stats already visible
+    metricObserver.unobserve(metricsSection);
+  }
+}, { threshold: 0.3 });
+if (metricsSection) metricObserver.observe(metricsSection);
+
+
+/* ============================================================
+   SMOOTH SCROLL FOR ANCHOR LINKS
+   ============================================================ */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      // Close mobile navbar if open
+      const navbarCollapse = document.getElementById('navbarContent');
+      if (navbarCollapse.classList.contains('show')) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    }
+  });
+});
+
+
+/* ============================================================
+   MINI CARD HOVER EFFECTS
+   ============================================================ */
+document.querySelectorAll('.metric-card-mini').forEach(card => {
+  card.addEventListener('mouseenter', function () {
+    this.style.borderColor = 'rgba(102,252,241,0.3)';
+    this.style.transform = 'translateY(-4px)';
+    this.style.boxShadow = '0 10px 25px rgba(0,0,0,0.3), 0 0 15px rgba(102,252,241,0.2)';
+  });
+  card.addEventListener('mouseleave', function () {
+    this.style.borderColor = 'rgba(102,252,241,0.1)';
+    this.style.transform = 'translateY(0)';
+    this.style.boxShadow = 'none';
+  });
+});
+
+</script>
+
+</body>
+</html>
